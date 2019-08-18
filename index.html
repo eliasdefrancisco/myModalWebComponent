@@ -22,5 +22,12 @@
     </my-modal>
     <p>Please confirm your choice.</p>
     <button>Show Details & Confirm</button>
+    <script>
+        const confirmButton = document.querySelector('button')
+        const modal = document.querySelector('my-modal')
+        confirmButton.addEventListener('click', () => {
+            modal.setAttribute('opened', '')
+        })
+    </script>
 </body>
 </html>
