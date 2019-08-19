@@ -2,6 +2,7 @@ class Modal extends HTMLElement {
     constructor() {
         super()
         this.attachShadow({ mode: 'open' })
+        this.isOpen = false
         this.shadowRoot.innerHTML = `
             <style>
                 #backdrop {
@@ -70,22 +71,30 @@ class Modal extends HTMLElement {
         `
     }
 
-    // Other way to respond to the attribute change without css
-    //
-    // attributeChangedCallback(name, oldValue, newValue) {
-    //     if (name === 'opened') {
-    //         if (this.hasAttribute('opened')) {
-    //             this.shadowRoot.querySelector('#backdrop').style.opacity = 1
-    //             this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all'
-    //             this.shadowRoot.querySelector('#modal').style.opacity = 1
-    //             this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all'
-    //         }
-    //     }
-    // }
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'opened') {
+            if (this.hasAttribute('opened')) {
+                this.isOpen = true
+                // Now this is made by css
+                // this.shadowRoot.querySelector('#backdrop').style.opacity = 1
+                // this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all'
+                // this.shadowRoot.querySelector('#modal').style.opacity = 1
+                // this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all'
+            }
+            else {
+                this.isOpen = false
+            }
+        }
+    }
 
-    // static get observedAttributes() {
-    //     return ['opened']
-    // }
+    static get observedAttributes() {
+        return ['opened']
+    }
+
+    open() {
+        this.setAttribute('opened', '')
+        this.isOpen = true
+    }
 
 }
 
