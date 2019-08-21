@@ -122,6 +122,8 @@ class Modal extends HTMLElement {
     
     _confirm() {
         this.hide()
+        const confirmEvent = new Event('confirm')
+        this.dispatchEvent(confirmEvent)
     }
 
 }
